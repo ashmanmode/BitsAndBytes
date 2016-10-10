@@ -1,0 +1,197 @@
+Writing a bash script
+
+make any file with no suffix
+
+#! /bin/bash
+for((i = 1 ; i < 16 ; i++ )) do
+echo  "Invocation $i"
+/path/to/executable
+done
+
+run this on terminal as
+> chmod +x ./nameoffile
+> ./nameoffile
+
+To record terminal
+> script log.txt
+-----------------------------------
+
+github uploads
+git add --all
+git commit -a -m "commit name"
+git push origin gh-pages/master
+
+
+Uploading directly to gh-pages
+$ git clone github.com/user/repository.git
+# Clone our repository
+# Cloning into 'repository'...
+# remote: Counting objects: 2791, done.
+# remote: Compressing objects: 100% (1225/1225), done.
+# remote: Total 2791 (delta 1722), reused 2513 (delta 1493)
+# Receiving objects: 100% (2791/2791), 3.77 MiB | 969 KiB/s, done.
+# Resolving deltas: 100% (1722/1722), done.
+$ cd repository
+
+git checkout --orphan gh-pages
+# Creates our branch, without any parents (it's an orphan!)
+# Switched to a new branch 'gh-pages'
+
+git rm -rf .
+# Remove all files from the old working tree
+# rm '.gitignore'
+$ echo "My Page" > index.html
+$ git add index.html
+$ git commit -a -m "First pages commit"
+$ git push origin gh-pages
+
+----------------------------------
+
+github cloning
+git clone http://github.com/username/repositoryname
+
+----------------------------------
+
+thread in cpp 
+terminal command to run programm
+g++ -std=c++0x -pthread -g filename.cpp
+e.g threads and chrono
+#include <iostream>
+#include <string>
+#include <thread>
+#include <chrono>
+
+using namespace std ;
+
+void fun1(int x)
+{
+  this_thread::sleep_for(chrono::seconds(x));
+  cout << "waiting for " << x << " sec" << endl ;
+}
+
+void fun2(string name)
+{
+  cout << "welcome2 " << name << endl ;
+}
+
+int main()
+{
+   std::thread t1(fun1,25);
+   std::thread t2(fun1,5);
+   std::thread t3(fun1,15);
+   std::thread t4(fun1,20);
+
+   t1.join();
+   cout << "thread 1 " << endl ;
+   t2.join();
+   cout << "thread 2 " << endl ;
+   t3.join();
+   cout << "thread 3 " << endl ;
+   t4.join();
+   cout << "thread 4 " << endl ;
+
+  return 0 ;
+
+}
+
+-----------------------------------------
+
+mutex
+in parallel programming it locks the access to set of functions or variables to all threads except one.
+e.g.
+#include <iostream>
+#include <thread>
+#include <mutex>
+
+using namespace std ;
+
+mutex mtx ;
+
+void fun1(int x,char c)
+{
+  mtx.lock();
+  for(int i = 0 ; i < x ;i++)
+    cout << c;
+  cout << endl ;
+  mtx.unlock();
+}
+
+int main()
+{
+   std::thread t1(fun1,50,'a');
+   std::thread t2(fun1,50,'b');
+
+   t1.join();
+   cout << "thread 1 " << endl ;
+   t2.join();
+   cout << "thread 2 " << endl ;
+  
+   return 0 ;
+
+}
+
+--------------------------------------
+
+ssh commands
+sudo apt-get install openssh-server
+ssh user@ip
+ifconfig //to know ip
+pscp user@ip:address/filename.ext user@ip:address/filename.ext //copy from a to b (if A is the host directly use address and same for B)
+
+-for sending message to other pc
+export DISPLAY=:0.0
+notify-send "Message Title" "Message Body"
+
+--------------------------------------
+
+knowing no. of threds system can handle
+cat /proc/sys/kernel/threads-max
+
+--------------------------------------
+
+running time of a programme
+#include "time.h"
+clock_t start = clock();
+cout << "time " << (float)(clock() - start)*1000/CLOCKS_PER_SEC << " ms" << endl;
+
+---````````-----------------------------------
+
+Header
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define maxsiz 1000000
+#define F first
+#define S second
+#define fr(i,k,n) for(int i = k ; i < n ; i++ )
+#define mp(a,b) make_pair(a,b)
+#define pb(a) push_back(a)
+#define printvect(a,n) fr(i,0,n) cout << a[i] << " " ;
+#define point pair<int,int>
+#define pii pair<int,int>
+#define pib pair<int,bool>
+#define vectin(a,n)
+typedef unsigned long long int ull;
+
+--------------------------------------------------
+
+bool isprime(ull a)
+{
+  //works till 10^18 
+  if(a == 2 || a == 3)
+    return true;
+  if(a%2 ==0 || a%3 == 0 )
+    return false;
+
+  ull i =  5 ;
+  while(i*i <= a)
+  {
+    if(a%i == 0 || a%(i+2) == 0)
+      return false ;
+    i = i+6;
+  }
+  return true;
+}
+
+---------------------------------------------
