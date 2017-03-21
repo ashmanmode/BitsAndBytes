@@ -54,7 +54,7 @@ int main()
 	fr(i,0,n+1)
 	{
 		fr(j,0,W+1)
-		cout << dp[i][j] << " ";
+			cout << dp[i][j] << " ";
 		cout << endl ;		
 	}
 	cout << dp[n][W] << endl ;

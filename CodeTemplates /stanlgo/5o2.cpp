@@ -9,7 +9,7 @@ void qs(int array[],int first,int last)
 	array[first] = temp;
 
 	//partition subroutine
-	int i = first+1, temp;
+	int i = first+1;
 	int pivot = array[first];
 	for(int j = first + 1; j < last; j++)
 	{
